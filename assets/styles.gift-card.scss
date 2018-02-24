@@ -1,0 +1,883 @@
+/*
+========================================================================================
+
+BASE
+
+----------------------------------------------------------------------------------------
+
+Contents:
+
+  - Variables
+  - Mixins
+  - General
+  - Viewport Fixes
+  - Links
+  - Media
+  - Headers
+  - Wrapper
+  - Text selection
+  - Animations
+
+======================================================================================== */
+
+// - Variables -------------------------------------------------------------------------
+
+//Colors
+
+$accent:#34aadc;
+$darkgrey:#58686f;
+$lightgrey:#bfbfbf;
+$smoke:#fafafa;
+
+// Prefixes
+
+$prefix-for-webkit:true;
+$prefix-for-mozilla:true;
+$prefix-for-spec:true;
+
+// - Mixins ----------------------------------------------------------------------------
+
+@mixin prefixer ($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if $prefix == webkit {
+      @if $prefix-for-webkit {
+        -webkit-#{$property}:$value;
+      }
+    }
+    @else if $prefix == moz {
+      @if $prefix-for-mozilla {
+        -moz-#{$property}:$value;
+      }
+    }
+    @else if $prefix == ms {
+      @if $prefix-for-microsoft {
+        -ms-#{$property}:$value;
+      }
+    }
+    @else if $prefix == o {
+      @if $prefix-for-opera {
+        -o-#{$property}:$value;
+      }
+    }
+    @else if $prefix == spec {
+      @if $prefix-for-spec {
+        #{$property}:$value;
+      }
+    }
+    @else  {
+      @warn "Unrecognized prefix:#{$prefix}";
+    }
+  }
+}
+
+@mixin transition ($properties...) {
+  @if length($properties) >= 1 {
+    @include prefixer(transition, $properties, webkit moz spec);
+  }
+
+  @else {
+    $properties:all 0.15s ease-out 0s;
+    @include prefixer(transition, $properties, webkit moz spec);
+  }
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@mixin inline-block {
+  display:inline-block;
+  vertical-align:baseline;
+  zoom:1;
+  *display:inline;
+  *vertical-align:auto;
+}
+
+@mixin clearfix {
+  &:after {
+    content:"";
+    display:table;
+    clear:both;
+  }
+}
+
+@mixin supported($feat) {
+  .#{$feat} & {@content;}
+}
+
+@mixin unsupported($feat) {
+  @if $feat == "flexbox" {
+    .no-#{$feat}.no-#{$feat}legacy & {@content;}
+  } @else {
+    .no-#{$feat} & {@content;}
+  }
+}
+
+@mixin box-sizing ($box) {
+  @include prefixer(box-sizing, $box, webkit moz spec);
+}
+
+@mixin innerShadow($size:1px, $radius:0px, $opacity:.1) {
+  position:relative;
+  &:before {
+    content:'';
+    position:absolute;
+    width:100%;
+    height:100%;
+    -moz-box-shadow:inset 0px 0px 0px $size rgba(0, 0, 0, $opacity);
+    -webkit-box-shadow:inset 0px 0px 0px $size rgba(0, 0, 0, $opacity);
+    box-shadow:inset 0px 0px 0px $size rgba(0, 0, 0, $opacity);
+    border-radius:$radius;
+    z-index:1;
+    pointer-events:none;
+    user-select:none;
+    display:block;
+  }
+}
+
+@mixin animation ($animations...) {
+  @include prefixer(animation, $animations, webkit moz spec);
+}
+
+@mixin opacity($opacity) {
+  zoom:1;
+  opacity:$opacity;
+  $opacity:$opacity * 100;
+  filter:alpha(opacity=#{
+  $opacity});
+}
+
+@mixin mq($value, $operator:'max-width', $query:'screen') {
+  @media #{$query} and (#{$operator}:#{$value}) {
+    @content;
+  }
+}
+
+/* - General ----------------------------------------------------------------------------- */
+
+html {
+  -webkit-text-size-adjust:100%;
+  -webkit-print-color-adjust:exact;
+}
+
+body {
+  font-family:"Raleway", sans-serif;
+  color:#000;
+  background-color:#fff;
+  padding:0;
+  margin:0;
+  -webkit-font-smoothing:antialiased;
+  font-size:12px;
+  line-height:1.6;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, main {
+  display:block;
+}
+
+/* - Viewport Fixes --------------------------------------------------------------------- */
+
+@-webkit-viewport {
+  width:device-width;
+}
+@-moz-viewport {
+  width:device-width;
+}
+@-ms-viewport {
+  width:device-width;
+}
+@-o-viewport {
+  width:device-width;
+}
+@viewport {
+  width:device-width;
+}
+
+/* - Links ----------------------------------------------------------------------------- */
+
+a {
+  color:#999;
+  text-decoration:none;
+  @include transition(color .2s ease-in-out, background-color .2s ease-in-out);
+  :hover {
+    text-decoration:underline;
+    color:#444;
+  }
+}
+
+/* Buttons */
+
+.btn {
+  background-color:#000;
+  color:#fff;
+  text-transform:uppercase;
+  letter-spacing:3px;
+  padding:0 30px;
+  font-size:15px;
+  font-weight:600;
+  min-widht:160px;
+  font-family:"Montserrat";
+  line-height:45px;
+  height:45px;
+  @include inline-block;
+
+  &:hover {
+    background-color:#444;
+  }
+}
+
+/* - Media ----------------------------------------------------------------------------- */
+
+img, video, object {
+  max-width:100%;
+  display:block;
+}
+
+/* - Headers --------------------------------------------------------------------------- */
+
+h2 {
+  margin:0;
+  font-size:1.125em;
+  font-weight:600;
+  color:$darkgrey;
+}
+
+h4 {
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  font-weight:normal;
+  font-size:.875em;
+  color:#999;
+  margin:0;
+}
+
+/* - Wrapper --------------------------------------------------------------------------- */
+
+.wrap {
+  width:95%;
+  max-width:540px;
+  margin:0 auto;
+  @include clearfix;
+}
+
+/* - Text selection -------------------------------------------------------------------- */
+
+::-moz-selection {
+  background-color:$accent;
+  color:#fff;
+}
+::selection {
+  background-color:$accent;
+  color:#fff;
+}
+
+/* - Animations ------------------------------------------------------------------------ */
+
+@include keyframes(slideup) {
+  0% {
+    opacity:0;
+    -webkit-transform:translateY(2000px) rotate(10deg);
+  }
+    60% {
+    opacity:1;
+    -webkit-transform:translateY(-30px);
+  }
+    80% {
+    -webkit-transform:translateY(10px);
+  }
+    100% {
+    -webkit-transform:translateY(0) rotate(0deg);
+  }
+}
+
+@include keyframes(popup) {
+  0% {
+    opacity:0;
+    -webkit-transform:translateY(30px);
+  }
+    60% {
+    opacity:1;
+    -webkit-transform:translateY(-10px);
+  }
+    80% {
+    -webkit-transform:translateY(2px);
+  }
+    100% {
+    -webkit-transform:translateY(0);
+  }
+}
+
+@include keyframes(container-slide) {
+  0% {
+    opacity:0;
+    -webkit-transform:rotate(-0deg);
+  }
+    100% {
+    -webkit-transform:rotate(0deg);
+  }
+}
+
+@include keyframes(fadein) {
+  0% {
+    opacity:0;
+  }
+    100% {
+    opacity:100;
+  }
+}
+
+
+
+
+/*
+========================================================================================
+
+LAYOUT
+
+----------------------------------------------------------------------------------------
+
+Contents:
+
+  - Header
+  - Gift card
+  - Footer
+
+======================================================================================== */
+
+
+
+/* - Header ---------------------------------------------------------------------------- */
+
+#header {
+  font-size:18px;
+  line-height:1.3em;
+  color:#000;
+  font-weight:600;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin:60px 0 30px;
+  text-align:left;
+  font-family:"Montserrat";
+  @include animation(fadein .5s ease-in-out both .4s);
+}
+
+.shop-url {
+  display:none;
+}
+
+#header:after {
+  content:"";
+  display:block;
+  margin:15px 0 17px;
+  width:90px;
+  border-bottom:2px solid #000;
+}
+
+#header > a.logo {
+  color:#000;
+  max-height:none;
+  width:auto;
+  margin:0;
+  line-height:inherit;
+  font-size:inherit;
+}
+
+#header > a.shop-url {
+  color:#000;
+  font-weight:200;
+  font-family:"Raleway";
+  font-size:12px;
+  line-height:20px;
+}
+
+
+
+
+/* - Gift Card ------------------------------------------------------------------------- */
+
+/* Gift Card container */
+
+main {
+  @include animation(slideup .8s ease-in-out);
+}
+
+#gift-card-outer-container {
+  @include animation(container-slide .8s ease-in-out);
+}
+
+#gift-card-inner-container {
+  background-color:#fff;
+  @include animation(cardslide .8s ease-in-out);
+  @include clearfix;
+}
+
+/* Header */
+
+#gift-card-header {
+  display:block;
+  overflow:hidden;
+  position:relative;
+}
+
+#gift-card-header h2 {
+  text-transform:uppercase;
+  color:#000;
+  font-weight:400;
+  font-size:14px;
+  line-height:1.6em;
+  margin:0 0 15px;
+  height:auto;
+  text-align:left;
+  font-family:"Montserrat";
+}
+
+.tag {
+  background-color:$lightgrey;
+  padding:.5em;
+  padding-bottom:.35em;
+  border-radius:4px;
+  font-size:.75em;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:#FFF;
+  line-height:1;
+}
+
+.tag.light {
+  background:transparent;
+  color:$lightgrey;
+  border:1px solid lighten($lightgrey, 10%);
+}
+
+#gift-card-header .tag {
+  float:right;
+}
+
+/* To/From */
+
+#gift-card-tofrom {
+  list-style-type:none;
+  padding:1em .75em 0;
+  margin:0;
+}
+
+#gift-card-tofrom li {
+  @include clearfix;
+  padding:.5em 0;
+}
+
+#gift-card-tofrom h4 {
+  float:left;
+  width:5em;
+}
+
+#gift-card-tofrom a {
+  float:left;
+  font-weight:600;
+  color:$darkgrey;
+  &:hover {
+    color:$accent;
+  }
+}
+
+/* Card holder */
+
+#gift-card-holder {
+  margin:60px 0 0;
+  position:relative;
+}
+
+#gift-card-holder .corner {
+  display:none;
+  width:47px;
+  height:47px;
+  position:absolute;
+  z-index:2;
+}
+
+#gift-card-holder .corner.top-left {
+  background:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/corner-top-left.gift-card.png?18007721820996071987) 0 0 no-repeat;
+  @include supported(svg) {
+    background:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/corner-top-left.gift-card.svg?18007721820996071987) 0 0 no-repeat;
+  }
+  top:-1px;
+  left:-1px;
+}
+
+#gift-card-holder .corner.top-right {
+  @include unsupported(borderradius) {
+    background:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/corner-top-right.gift-card.png?18007721820996071987) 0 0 no-repeat;
+    top:0px;
+    right:0px;
+    width:7px;
+    height:7px;
+  }
+}
+
+#gift-card-holder .corner.bottom-left {
+  @include unsupported(borderradius) {
+    background:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/corner-bottom-left.gift-card.png?18007721820996071987) 0 0 no-repeat;
+    bottom:0px;
+    left:0px;
+    width:7px;
+    height:7px;
+  }
+}
+
+#gift-card-holder .corner.bottom-right {
+  background:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/corner-bottom-right.gift-card.png?18007721820996071987) 0 0 no-repeat;
+  @include supported(svg) {
+    background:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/corner-bottom-right.gift-card.svg?18007721820996071987) 0 0 no-repeat;
+  }
+  bottom:-1px;
+  right:-1px;
+}
+
+#gift-card {
+  position:relative;
+  @include box-sizing(border-box);
+}
+
+#gift-card-code-outer {
+  position:absolute;
+  bottom:20px;
+  text-align:center;
+  width:100%;
+}
+
+#gift-card-code-inner {
+  @include inline-block;
+  background-color:#fff;
+  padding:5px;
+  max-width:450px;
+  box-shadow:0 0 0 1px rgba(#000, .1);
+  .small & {
+    overflow:auto;
+  }
+}
+
+#gift-card-code-inner strong {
+  font-weight:400;
+  font-size:24px;
+  text-transform:uppercase;
+  border:1px dashed #c3c5c8;
+  padding:10px 15px;
+  @include inline-block;
+  color:#000;
+  line-height:1em;
+  letter-spacing:1px;
+  .disabled & {
+    color:#999;
+    text-decoration:line-through;
+  }
+}
+
+#gift-card-code-inner span + span {
+  margin-left:.25em;
+}
+
+#gift-card-amount {
+  position:absolute;
+  top:0;
+  right:0;
+  color:#fff;
+  font-size:36px;
+  line-height:1em;
+  padding:20px 20px 0 0;
+}
+
+#gift-card-amount.medium {
+}
+
+#gift-card-amount strong {
+  text-shadow:3px 3px 0 rgba(#000, .1);
+  display:block;
+}
+
+.tooltip {
+  position:relative;
+}
+
+.tooltip-container {
+  display:block;
+  position:absolute;
+  top:-100%;
+  right:50%;
+  z-index:3;
+  color:#fff;
+  text-align:center;
+  white-space:nowrap;
+  @include animation(popup .5s ease-in-out both .7s);
+  top:-50%;
+  margin-top:.25em;
+  .tooltip:hover & {
+    display:block;
+  }
+}
+
+.tooltip-triangle {
+  content:"";
+  display:block;
+  width:0;
+  height:0;
+  border-left:8px solid transparent;
+  border-right:8px solid transparent;
+  border-top:5px solid #333;
+  border-top:5px solid rgba(#333, .9);
+  position:absolute;
+  left:100%;
+  bottom:0;
+  margin-left:-5px;
+  margin-bottom:-5px;
+}
+
+.tooltip-label {
+  display:block;
+  position:relative;
+  right:-50%;
+  border:none;
+  border-radius:4px;
+  background:#333;
+  background:rgba(#333, .9);
+  min-height:14px;
+  font-weight:400;
+  font-size:12px;
+  text-decoration:none;
+  line-height:16px;
+  text-shadow:none;
+  padding:.5em .75em;
+  margin-left:.25em;
+}
+
+#gift-card-amount .tooltip-label {
+  font-size:.4em;
+  color:#fff;
+}
+
+#gift-card-amount .tooltip-label small {
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:#b3b3b3;
+  font-size:.875em;
+}
+
+#gift-card-instructions {
+  margin:30px 30px 45px;
+  font-size:17px;
+  line-height:1.6em;
+  text-align:center;
+}
+
+/* Actions */
+
+#gift-card-actions {
+  text-align:center;
+  position:relative;
+  display:block;
+  overflow:hidden;
+}
+
+.action-link {
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-top:1.75em;
+}
+
+.action-link.left {
+  position:absolute;
+  left:1.25em;
+  top:.85em;
+}
+
+.action-link.right {
+  position:absolute;
+  right:60px;
+  top:12px;
+  margin-top:0;
+}
+
+.action-link.left .ico-16,
+.action-link.right .ico-16 {
+  margin-right:.5em;
+}
+
+.action-link .ico-16 {
+  @include opacity(.25);
+  @include transition(opacity .3s ease-in-out);
+}
+
+.action-link:hover .ico-16 {
+  @include opacity(.4);
+}
+
+.ico-16 {
+  @include inline-block;
+  width:17px;
+  height:17px;
+  vertical-align:bottom;
+  margin-bottom:-1px;
+  background-position:0 0;
+  background-repeat:no-repeat;
+}
+
+.ico-16.print {
+  background-image:url('icon-print.gift-card.png');
+  @include supported(svg) {
+    background-image:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/icon-print.gift-card.svg?18007721820996071987);
+  }
+}
+
+.ico-16.email {
+  background-image:url('icon-email.gift-card.png');
+  @include supported(svg) {
+    background-image:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/icon-email.gift-card.svg?18007721820996071987);
+  }
+}
+
+
+
+/* - Footer ---------------------------------------------------------------------------- */
+
+footer[role='contentinfo'] {
+  text-align:center;
+  padding:3em 0;
+  @include animation(fadein .5s ease-in-out both .4s);
+}
+
+#footer-links {
+  list-style-type:none;
+  margin:0;
+  padding:0;
+  text-align:center;
+  padding-bottom:3em;
+}
+
+#footer-links li {
+  @include inline-block;
+  & + li {
+    margin-left:1em;
+  }
+}
+#footer-links li a {
+  color:$lightgrey;
+  &:hover {
+    color:darken($lightgrey, 15%);
+  }
+}
+
+footer[role='contentinfo'] .gift-card-icon {
+  width:45px;
+  @include inline-block;
+}
+
+
+
+
+
+/*
+========================================================================================
+
+MEDIA QUERIES
+
+---------------------------------------------------------------------------------------- */
+
+@include mq(540px) {
+
+  #header {
+    margin-top:45px;
+  }
+  #gift-card-holder {
+    margin-top:30px;
+  }
+  #gift-card-code-outer {
+    bottom:15px;
+  }
+  #gift-card-code-inner strong {
+    font-size:18px;
+    padding:7px 10px;
+  }
+  #gift-card-instructions {
+  }
+  
+  #gift-card-actions {
+  }
+  .action-link.right {
+    right:30px;
+  }
+}
+
+@include mq(420px) {
+
+  #gift-card-code-inner strong {
+    font-size:15px;    
+  }
+  .action-link.right {
+    right:10px;
+  }
+
+}
+
+/*
+========================================================================================
+
+PRINT STYLES
+
+---------------------------------------------------------------------------------------- */
+
+@media print {
+
+
+  // Page Layout adjustments for print
+  @page {
+    margin:0.5cm;
+  }
+  p, h2, h3 {
+    orphans:3;
+    widows:3;
+  }
+  h2, h3 {
+    page-break-after:avoid;
+  }
+
+  // Reset the background color to white
+  body {
+    background-color:#fff;
+  }
+
+  // Hide unnecessary elements when printed
+  #gift-card-actions, #gift-card-holder .corner, .tooltip-container, #gift-card:before {
+    display:none;
+  }
+
+  // Increase contrast
+  #gift-card-code-inner strong {
+    color:#555;
+  }
+  #gift-card-amount .tooltip {
+    color:#fff !important;
+  }
+  .shop-url {
+  color:lighten(#58686F, 15%);
+    display:block;
+  }
+  .logo {
+    color:#58686F;
+  }
+
+  // Remove box-shadows
+  #gift-card-outer-container, #gift-card-inner-container, #gift-card-code-inner, #gift-card:before {
+    box-shadow:none;
+  }
+
+}
