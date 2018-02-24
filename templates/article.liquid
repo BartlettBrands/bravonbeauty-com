@@ -1,11 +1,9 @@
 {% paginate article.comments by settings.blog-comments-per-page %}
-
-
 <header>
   <div class="row show-for-medium-up">
     <div class="columns large-8">
       {% include 'snippet-breadcrumbs' %}
-    </div> 
+    </div>
 
     <div class="previous-next columns large-4">
       <div class="next">
@@ -26,13 +24,13 @@
 
 <div class="left-two-columns-wrapper row">
   <div class="article columns large-9">
-    
+
     <div class="left-sidebar columns large-3 show-for-large-up">
       <div class="date block">
         <h3 class="title">{{ 'blog.article.date' | t }}</h3>
         <p class="content">{{ article.published_at | date: format: 'month_day_year' }}</p>
       </div>
-        
+
       <div class="author block">
         <h3 class="title">{{ 'blog.article.written_by' | t }}</h3>
         <p class="content">{{ article.author }}</p>
@@ -63,17 +61,17 @@
       <!-- Begin comments -->
       {% if blog.comments_enabled? %}
       <div id="comments" class="comments">
-        
+
         {% if article.comments.size > 0 or comment.created_at %}
         <h2 class="title">{{ 'blog.article.comments' | t }}</h3>
-        
+
         {% if comment and comment.created_at %}
           <div id="comment-{{ comment.id }}" class="comment clearfix">
             <h3 class="author"><strong>{{ comment.author }}</strong> <br/>  <span class="date">{{ comment.created_at | date: format: 'month_day_year' }}</span></h3>
             <div class="comment-content">{{ comment.content }}</div>
           </div> <!-- /.comment -->
         {% endif %}
-        
+
         {% for comment in article.comments %}
           <div id="comment-{{ comment.id }}" class="comment clearfix">
             <h3 class="author"><strong>{{ comment.author }}</strong> <br/> <span class="date">{{ comment.created_at | date: format: 'month_day_year' }}</span></h3>
@@ -86,7 +84,7 @@
         </div>
 
         {% endif %}
-        
+
         <div class="comment-form">
           {% form article %}
           <h2 class="title">{{ 'blog.comment.title' | t }}</h2>
@@ -118,16 +116,16 @@
 
           {% endform %}
         </div>
-      </div> 
+      </div>
       {% endif %}
       <!-- End comments -->
     </div>
   </div>
-    
+
   <!-- Begin sidebar -->
   {% include 'snippet-blog-sidebar' %}
 
   <!-- End sidebar -->
-  
+
 </div>
 {% endpaginate %}

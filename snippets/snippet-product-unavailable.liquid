@@ -21,7 +21,7 @@
       <div class="notify-me-wrapper clearfix">
         <input required="required" type="email" name="contact[email]" placeholder="{{ 'products.sold_out.email_placeholder' | t }}" class="{% if form.errors contains 'email' %} error{% endif %}" value="{{ customer.email }}" />
         <input type="hidden" class="email-body" name="contact[body]" value="{{ 'products.email_description' | t }}: {{ product.title | escape }}" />
-        <input style="" class="button prefix" type="submit" value="{{ 'products.sold_out.button' | t }}" />         
+        <input style="" class="button prefix" type="submit" value="{{ 'products.sold_out.button' | t }}" />
       </div>
       {% endunless %}
     {% endform %}

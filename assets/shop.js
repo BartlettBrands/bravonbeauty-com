@@ -877,7 +877,7 @@
         navigationText: false
       });
       $('.product-slider .product-item').show();
-      
+
       // ADJUST SMALL PROMOS TO WORK DIFFERENTLY FOR MOBILE
       smallPromos = function() {
         getClientWidth();
@@ -894,7 +894,7 @@
            $('.small-promos .image-text-widget .caption').css("display","block");
         };
       };
-      smallPromos();      
+      smallPromos();
       instagramFeed();
       $(window).resize(function() {
         smallPromos();
@@ -1077,7 +1077,7 @@
 
       // first, copy and paste tab list above every pane.
       // css hides the appropriate ones
-      $("#product-tabs-plugin > div > .fd-product-tabs").clone().insertBefore(fdPane);      
+      $("#product-tabs-plugin > div > .fd-product-tabs").clone().insertBefore(fdPane);
 
       // set width for main tabs
       fdMainTabs.css("width", 100/tabCount + "%");

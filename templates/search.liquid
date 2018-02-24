@@ -23,14 +23,14 @@
 </div>
 
 {% if search.results != empty %}
-  
+
   <div class="row">
     <div class="columns">
       <div class="divider results"></div>
     </div>
   </div>
 
-<!-- Begin results -->
+  <!-- Begin results -->
   {% if settings.search-products-only %}
     <section class="row">
       <div class="product-grid clearfix">
@@ -39,23 +39,23 @@
         {% endfor %}
       </div>
     </section>
-  {% else %} 
+  {% else %}
   {% comment %} mixed results {% endcomment %}
     {% for item in search.results %}
       <div class="row results narrow">
         <div class="large-4 columns text-center">
-          
+
             <div class="thumbnail">
               {% if item.featured_image.size > 0 %}
               <a href="{{ item.url }}">{{ item.featured_image | product_img_url: 'medium' | img_tag }}</a>
               {% endif %}
             </div>
-          
+
         </div>
         <div class="large-8 columns">
           <div class="search-result">
             <h3>{{ item.title | highlight: search.terms | link_to: item.url }}</h3>
-            
+
             {{ item.content | strip_html | truncatewords: 40 | highlight: search.terms }}
           </div>
         </div>
@@ -68,7 +68,7 @@
       </div>
     {% endfor %}
   {% endif %}
-<!-- End results -->
+  <!-- End results -->
 {% endif %}
 
 <div class="row">

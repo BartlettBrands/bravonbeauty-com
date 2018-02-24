@@ -14,7 +14,7 @@
       {% if collection.all_tags.size > 0 and settings.collections-tags-show %}
 
           <span class="title">{{ 'collections.tags_title' | t }}</span>
-          
+
           <form class="custom">
             <select class="small tags-listbox" name="coll-filter" size="1">
               <option value="">{{ 'collections.tags_show_all' | t }}</option>
@@ -82,7 +82,7 @@
   var collFilters = jQuery('.tags-listbox');
   collFilters.change(function() {
     var newTags = [];
-    collFilters.each(function() { 
+    collFilters.each(function() {
       if (jQuery(this).val()) {
         newTags.push(jQuery(this).val());
       }
@@ -90,7 +90,7 @@
     if (newTags.length) {
       var query = newTags.join('+');
       window.location.href = jQuery('{{ 'tag' | link_to_tag: 'tag' }}').attr('href').replace('tag', query);
-    } 
+    }
     else {
       {% if collection.handle %}
       window.location.href = '/collections/{{ collection.handle }}';

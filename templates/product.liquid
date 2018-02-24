@@ -14,7 +14,7 @@
           {% endif %}
         </div>
 
-        <div class="previous"> 
+        <div class="previous">
           {% if collection.previous_product %}
             <a title="Previous Product" href="{{ collection.previous_product}}"><span aria-hidden="true" class="glyph arrow-left"></span> {{ 'products.previous_item' | t }}</a>
           {% endif %}
@@ -65,11 +65,11 @@
     </div>
 
 
-    
+
 <!--     <div data-position="prices" class="prices_wrap"></div -->
 
     <div data-position="cart-form">
-      <form class="cart-form custom" action="/cart/add" method="post" enctype="multipart/form-data">  
+      <form class="cart-form custom" action="/cart/add" method="post" enctype="multipart/form-data">
         <div class="variants {% unless product.variants.size > 1 %}hidden{% endunless %}">
           <select id="variant-listbox" name="id" class="medium">
             {% for variant in product.variants %}
@@ -113,7 +113,7 @@
           </div>
         </div>
       </form>
-      
+
       {% include 'snippet-product-unavailable' %}
 
     </div>
@@ -152,7 +152,7 @@
     </div>
   </div>
 
-  
+
 </article>
 
 {% if settings.product-share-this-show %}
@@ -228,4 +228,3 @@
     $(this).trigger('click');
   });
 </script-->
- 

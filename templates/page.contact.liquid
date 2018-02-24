@@ -4,11 +4,11 @@
   </div>
 </div>
 
-  
+
 <div class="row">
-  <div class="columns large-7">    
+  <div class="columns large-7">
     <div class="page-content rte-content colored-links">
-      
+
       {{ page.content }}
     </div>
   </div>
@@ -32,9 +32,9 @@
         </ul>
       </div>
       {% endif %}
-      
+
       {% unless form.posted_successfully? %}
-    
+
       <p>
         <label>{{ 'contact_page.name' | t }}:</label>
         <input type="text" id="contactFormName" name="contact[name]" class="styled-input{% if form.errors contains 'name' %} error{% endif %}" value="{{ contact.fields.name }}" />
@@ -46,7 +46,7 @@
       <p>
         <label>{{ 'contact_page.phone' | t }}:</label>
         <input type="tel" id="contactFormTelephone" name="contact[phone]" class="styled-input{% if form.errors contains 'phone' %} error{% endif %}" value="{{ contact.fields.phone }}" />
-      </p> 
+      </p>
       <p>
         <label>{{ 'contact_page.message' | t }}:</label>
         <textarea required="required" rows="10" cols="60"  id="contactFormMessage" name="contact[body]" class="styled-input{% if form.errors contains 'body' %} error{% endif %}">{{  contact.fields.body }}</textarea>
@@ -54,9 +54,9 @@
       <p>
         <input class="button styled-submit" type="submit" id="contactFormSubmit" value="{{ 'contact_page.button' | t }}" />
       </p>
-      
+
       {% endunless %}
-    
+
       {% if form.posted_successfully? or form.errors %}
         <script>
           window.location.hash = '#page-content';
@@ -67,8 +67,3 @@
 
   </div>
 </div>
-
-
-
-
-

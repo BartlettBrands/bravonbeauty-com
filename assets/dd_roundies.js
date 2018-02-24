@@ -9,7 +9,7 @@
 * Usage:
 * DD_roundies.addRule('#doc .container', '10px 5px'); // selector and multiple radii
 * DD_roundies.addRule('.box', 5, true); // selector, radius, and optional addition of border-radius code for standard browsers.
-* 
+*
 * Just want the PNG fixing effect for IE6, and don't want to also use the DD_belatedPNG library?  Don't give any additional arguments after the CSS selector.
 * DD_roundies.addRule('.your .example img');
 **/

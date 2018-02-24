@@ -4,7 +4,7 @@
       <div class="columns large-12">
         <h1 class="page-title">{{ 'customer.order.page_title' | t: name: order.name }} <span class="note order_date">&mdash; {{ order.created_at | date: format: 'month_day_year' }}</span></h1>
         {% include 'snippet-breadcrumbs' %}
-        
+
         {% if order.cancelled %}
         <div id="order_cancelled" class="flash notice">
           <h5 id="order_cancelled_title">{{ 'customer.order.cancelled' | t }} <span class="note">{{ order.cancelled_at | date: format: 'month_day_year' }}</span></h5>
@@ -13,7 +13,7 @@
         {% endif %}
       </div>
     </div>
-    
+
     <div class="row large">
       <div id="order_payment" class="columns large-6">
         <h2 class="order_section_title">{{ 'customer.order.billing_address' | t }}</h2>
@@ -55,9 +55,9 @@
         </div>
       </div>
       {% endif %}
-      
+
     </div>
-    
+
     <div class="row large">
       <div class="columns large-12">
         <table id="order_details" class="responsive">
@@ -74,7 +74,7 @@
             {% for line_item in order.line_items %}
             <tr id="{{ line_item.id }}" class="{% cycle 'odd', 'even' %}">
               <td data-label="{{ 'customer.order.item' | t }}" class="">
-                {{ line_item.title | link_to: line_item.product.url }} 
+                {{ line_item.title | link_to: line_item.product.url }}
                 {% if line_item.fulfillment %}
                   <div class="note">
                     {% assign date = line_item.fulfillment.created_at | date: format: 'month_day_year' %}
@@ -93,11 +93,11 @@
             {% endfor %}
 
 
-          
+
             <tr class="order_summary note">
               <td class="label">{{ 'customer.order.subtotal' | t }}</td><td colspan="3"></td>
               <td class="total money">{{ order.subtotal_price | money }}</td>
-            </tr>   
+            </tr>
 
             {% for shipping_method in order.shipping_methods %}
             <tr class="order_summary note">
@@ -113,17 +113,17 @@
                 <td colspan="3"></td>
                 <td class="total money">{{ tax_line.price | money }}</td>
               </tr>
-            {% endfor %}    
+            {% endfor %}
 
             <tr class="order_summary order_total">
               <td class="label">{{ 'customer.order.total' | t }}</td>
               <td colspan="3"></td>
               <td class="total money">{{ order.total_price | money }} {{ order.currency }}</td>
-            </tr>   
-          </tbody>   
+            </tr>
+          </tbody>
         </table>
       </div>
-    </div> 
-    
+    </div>
+
   </div>
 </div>
