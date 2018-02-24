@@ -2622,6 +2622,7 @@ div#shopify-product-reviews .spr-review-reply {background:#d3d5d8; margin-bottom
 .swatch-element .custom.radio {display:none;}
 .swatch-element label {float:left; margin:0; background-color:#d3d5d8; font-size:13px; text-align:center; white-space:nowrap; text-transform:uppercase; min-width:{{size}} !important; height:{{sizeHalf}} !important; line-height:{{sizeHalf}}; position:relative;}
 .swatch-element label:hover {outline:1px solid #000;}
+.swatch-element input:disabled ~ label:hover {outline:0;}
 .swatch-element label {padding:0 10px; overflow:hidden; margin:0px 9px 9px 0; height:{{sizeHalf}}; line-height:{{sizeHalf}};}
 .color.swatch-element label {padding:0; background-size:cover; height:{{size}} !important; line-height:{{size}};}
 
@@ -2653,6 +2654,8 @@ div#shopify-product-reviews .spr-review-reply {background:#d3d5d8; margin-bottom
 .swatch-element label:hover ~ .permatitle {display:block; z-index:2;}
 .swatch-element label:hover ~ .permatitle p {border-bottom-color:#000;}
 .swatch-element label:hover ~ .permatitle p.permatitle-body {background:#f2f2f2;}
+.swatch-element input:disabled ~ .permatitle p.permatitle-body,
+.swatch-element span.disabled ~ .permatitle p.permatitle-body {background:black; color:white; font-weight:bold;}
 
 .swatch-element input:checked ~ .permatitle p.permatitle-header:before,
 .swatch-element span.checked ~ .permatitle p.permatitle-header:before {content:"SELECTED";}

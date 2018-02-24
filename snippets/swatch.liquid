@@ -2,8 +2,6 @@
   From: http://docs.shopify.com/manual/configuration/store-customization/showcasing-products/add-color-swatches-to-your-products
 {% endcomment %}
 
-
-
 {% comment %}
   Set the extension of your color files below. Use 'png', 'jpeg', 'jpg' or 'gif'.
 {% endcomment %}
@@ -12,7 +10,7 @@
 
 {% if swatch == blank %}
 <div class="swatch error">
-  <p>You must include the snippet swatch.liquid with the name of a product option.</p> 
+  <p>You must include the snippet swatch.liquid with the name of a product option.</p>
   <p>Use: <code>{% raw %}{% include 'swatch' with 'name of your product option here' %}{% endraw %}</code></p>
   <p>Example: <code>{% raw %}{% include 'swatch' with 'Color' %}{% endraw %}</code></p>
 </div>
@@ -48,15 +46,31 @@
 </div>
 {% else %}
 <div class="swatch" data-option-index="{{ option_index }}">
+
+  {% assign variant_selected = '' %}
   {% assign values = '' %}
   {% for variant in product.variants %}
+    {% if variant_selected == '' %}
+      {% if variant.selected == true %}
+        {% if variant.available == false %}
+          {% assign variant_selected = 'selected variant is unavailable' %}
+        {% else %}
+          {% assign variant_selected = variant.id %}
+        {% endif %}
+      {% else %}
+        {% if variant.available == true %}
+          {% assign variant_selected = variant.id %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+
     {% assign value = variant.options[option_index] %}
     {% unless values contains value %}
       {% assign values = values | join: ',' %}
-      {% assign values = values | append: ',' | append: value %} 
+      {% assign values = values | append: ',' | append: value %}
       {% assign values = values | split: ',' %}
       <div data-value="{{ value | escape }}" class="swatch-element {% if is_color %}color{% endif %} {{ value | handle }} {% if variant.available %}available{% else %}soldout{% endif %}">
-        <input id="swatch-{{ option_index }}-{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}" {% if forloop.first %} checked{% endif %} {% unless variant.available %}disabled{% endunless %} />
+        <input id="swatch-{{ option_index }}-{{ value | handle }}" type="radio" name="swatch-{{ option_index }}" value="{{ value | escape }}" {% if variant_selected == variant.id %} checked{% endif %} {% unless variant.available %}disabled{% endunless %} />
         {% if is_color %}
           <label for="swatch-{{ option_index }}-{{ value | handle }}" class="color_swatch" style="background-color: {{ value | split: ' ' | last | handle }}; background-image: url({{ value | handle | prepend: 'swatch-' | append: '.' | append: file_extension | asset_url }})">
             <span class="crossed-out">SOLD OUT</span>
@@ -71,20 +85,20 @@
             <span class="crossed-out">SOLD OUT</span>
           </label>
           <div class="permatitle">
-			{%comment%}a prefix word is directed by css :before element, hence the single colon. {%endcomment%}
+            {%comment%}a prefix word is directed by css :before element, hence the single colon. {%endcomment%}
             <p class="permatitle-header">:</p>
             <p class="permatitle-body">{{ value }}</p>
           </div>
         {% endif %}
       </div>
     {% endunless %}
-<!--
+    <!--
     {% if variant.available %}
     <script>
       jQuery('.swatch[data-option-index="{{ option_index }}"] .{{ value | handle }}').removeClass('soldout').addClass('available').find(':radio').removeAttr('disabled');
     </script>
     {% endif %}
--->
+    -->
 
   {% endfor %}
 </div>

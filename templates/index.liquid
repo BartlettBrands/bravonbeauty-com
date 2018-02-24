@@ -2,17 +2,14 @@
 {% for widget_order in widgets_order %}
   {% if widget_order == 'a' %}
 
-	<section class="slider {{ settings.color-icons-theme }}">
+    <section class="slider {{ settings.color-icons-theme }}">
       <div class="row">
         <div class="slides">
 
           {% assign slides_exist = false %}
-
-
           {% for i in (1..7) %}
 
             {% capture slide_enabled %}home-slider-slide-{{ i }}-enabled{% endcapture %}
-            
             {% capture slide_img %}home-slider-slide-{{ i }}.jpg{% endcapture %}
             {% capture slide_media_type %}home-slider-slide-{{ i }}-type{% endcapture %}
             {% capture slide_bg_color %}home-slider-slide-{{ i }}-bg-color{% endcapture %}
@@ -24,7 +21,6 @@
             {% capture slide_y_pos %}home-slider-slide-{{ i }}-y-pos{% endcapture %}
             {% capture slide_text_pos %}home-slider-slide-{{ i }}-text-pos{% endcapture %}
             {% capture slide_video %}home-slider-slide-{{ i }}-video{% endcapture %}
-
 
             {% if settings[slide_enabled] %}
               {% assign slides_exist = true %}
@@ -61,7 +57,7 @@
                       {% assign video_src = attribute | replace: 'src=', '' | replace: '"', '' | replace: "'", ""  %}
                     {% endif %}
                   {% endfor %}
-                  
+
 
                   <a href="{{ video_src }}" class="play-button"><div class="triangle"></div></a>
 
@@ -69,8 +65,8 @@
 
 
                 {% if caption_exists %}
-                    <div class="caption {{ settings[slide_x_pos] }} {{ settings[slide_y_pos] }} {{ settings[slide_text_pos] }}">
-                      <div class="bg"></div>
+                  <div class="caption {{ settings[slide_x_pos] }} {{ settings[slide_y_pos] }} {{ settings[slide_text_pos] }}">
+                    <div class="bg"></div>
                     {% if settings[slide_title].size > 0 %}
                       <h2 class="title">{{ settings[slide_title] }}</h2>
                     {% endif %}
@@ -86,11 +82,11 @@
                 {% endif %}
 
                 {% if link_whole_slide %}
-                </a>
+                  </a>
                 {% endif %}
               </div>
             {% endif %}
-            
+
           {% endfor %}
 
           {% comment %} Placeholders until slides have been entered in settings {% endcomment %}
@@ -133,14 +129,14 @@
     <div class="modal video">
       <div class="bg"></div>
       <a aria-hidden="true" class="close glyph cross"></a>
-        <div class="player columns large-8">
-          <div class="flex-video">
-          </div>
+      <div class="player columns large-8">
+        <div class="flex-video">
         </div>
+      </div>
 
-        <div class="caption columns large-4">
-          
-        </div>
+      <div class="caption columns large-4">
+
+      </div>
     </div>
     <div class="modal-mask"></div>
 
@@ -156,7 +152,7 @@
     {% else %}
       {% assign collection = collections[settings.home-product-slider-collection] %}
     {% endif %}
-      
+
     <div class="product-slider {{ settings.color-icons-theme }}">
       <div class="row header">
         <div class="columns">
@@ -178,6 +174,7 @@
 
 
   {% elsif widget_order == 'c' %}
+
     <div class="widgets featured-promo-wrap">
       <div class="featured-promo">
         <div class="row">
@@ -218,8 +215,6 @@
               {% continue %}
             {% endif %}
 
-
-
             <div class="columns{% if block_type == 'text' %} {{ widget_text_align}}{% endif %}{% unless settings.home-featured-promo-right-type == 'none' %} large-6{% endunless %}">
 
               {% if block_type == 'text'  %}
@@ -232,7 +227,7 @@
                   {{ widget_description | newline_to_br  }}
                   {% if widget_link_text.size > 0 %}
                     <p class="call-to-action">
-                      <a class="button" href="{{ widget_link_url }}">{{ widget_link_text }}</a> 
+                      <a class="button" href="{{ widget_link_url }}">{{ widget_link_text }}</a>
                     <p>
                   {% endif %}
                 </div>
@@ -262,7 +257,7 @@
                 </div>
 
               {% endif %}
-              
+
             </div>
           {% endfor %}
 
@@ -280,7 +275,7 @@
               <div class="description">
                 {{ 'home.featured_promotion.description' | t }}
                 <p class="call-to-action">
-                  <a class="button" href="http://troop.ws/pages/blockshop-theme-home-widgets-block" target="_blank">{{ 'home.featured_promotion.button' | t }}</a> 
+                  <a class="button" href="http://troop.ws/pages/blockshop-theme-home-widgets-block" target="_blank">{{ 'home.featured_promotion.button' | t }}</a>
                 </p><p>
               </p></div>
             </div>
@@ -292,6 +287,7 @@
 
 
   {% elsif widget_order == 'd' %}
+
     <div class="widgets small-promos-wrap">
       <div class="small-promos">
         <div class="row">
@@ -303,7 +299,7 @@
 
 
           {% if column_count > 0 %}
-            
+
             {% assign widget = 'home-widget-image-text-1' %}
             {% if settings.home-widget-image-text-1 %}
             <div class="columns large-{{ 12 | divided_by: column_count }}">
@@ -333,7 +329,7 @@
             {% endif %}
 
           {% else %} {% comment %} Placeholders {% endcomment %}
-              
+
             <div class="columns large-4">
               <div class="image-text-widget">
                 <a href="https://themes.shopify.com/themes/blockshop/styles/deli" target="_blank">
@@ -368,13 +364,16 @@
                   {{ 'placeholder-home-widget-image-text-3.jpg' | asset_url | img_tag }}
                 </a>
               </div>
-            </div> 
+            </div>
 
           {% endif %}
         </div>
       </div>
     </div>
+
+
   {% elsif widget_order == 'e' %}
+
     <div class="widgets social-feeds-wrap">
 
     {% assign column_count = 0 %}
@@ -407,9 +406,8 @@
           {% endif %}
         </div>
       </div>
-      
+
     {% endif %}
     </div> <!-- .widgets -->
   {% endif %}
 {% endfor %}
-
