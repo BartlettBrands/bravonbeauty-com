@@ -2579,13 +2579,79 @@ div#shopify-product-reviews .spr-review-reply {background:#d3d5d8; margin-bottom
 
 /*  6.2 - Products Tabs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-.template-product ul.fd-product-tabs {border-bottom:0; margin:60px 0 0;}
-.template-product ul.fd-product-tabs li {width:25%; box-sizing:border-box; border:0;}
-.template-product ul.fd-product-tabs li a {display:block; background:transparent none; border-radius:0;
+.template-product ul.fd-product-tabs {
+    border-bottom: 1px solid #DDDDDD;
+    display: block;
+    margin: 0 0 20px;
+    padding: 0;
+
+  border-bottom:0; margin:60px 0 15px;
+}
+.template-product ul.fd-product-tabs li {
+    float: left;
+    height: 30px;
+    margin-bottom: 0;
+    padding: 0;
+    width: auto;
+
+  width:25%; box-sizing:border-box; border:0; display: block;
+}
+.template-product ul.fd-product-tabs li a {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #F5F5F5;
+    border-color: #DDDDDD !important;
+    border-style: solid;
+    border-width: 1px 1px 0 1px;
+    display: block;
+    font-size: 13px;
+    height: 29px;
+    line-height: 30px;
+    margin: 0;
+    padding: 0 20px;
+    text-decoration: none;
+    width: auto;
+    color: #303030;
+    border-bottom:none !important;
+
+  display:block; background:transparent none; border-radius:0;
   margin:0 !important; height:auto; padding:0 10px 0 0; width:auto;
   font-size:inherit; line-height:inherit; font-weight:inherit; letter-spacing:inherit; text-decoration:none;
   border:0; border-bottom:2px solid #000 !important;}
-.template-product ul.fd-product-tabs li a.fd-product-tab-active {border-bottom-width:6px !important; height:auto; position:static; top:auto; padding-top:0 !important;}
+.template-product ul.fd-product-tabs li a.fd-product-tab-active {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-left-width: 1px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    color: #111111;
+    height: 30px;
+    margin: 0 0 0 -1px;
+    padding-top: 4px;
+    position: relative;
+    top: -4px;
+
+  border-bottom-width:6px !important; height:auto; position:static; top:auto; padding-top:0 !important;}
+.template-product ul.fd-product-tabs li:first-child a.fd-product-tab-active {
+    margin-left: 0;}
+.template-product ul.fd-product-tabs li:first-child a {
+    border-top-left-radius: 2px;
+    border-width: 1px 1px 0;}
+.template-product ul.fd-product-tabs li:last-child a {
+    border-top-right-radius: 2px;}
+.template-product ul.fd-product-tabs:before,
+.template-product ul.fd-product-tabs:after {
+    content: " ";
+    display: block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;}
+.template-product ul.fd-product-tabs:after {
+    clear: both;}
+
 .template-product ul.fd-product-tabs li a:hover {color:#444;}
 .template-product .fd-product-tab-content {max-width:1200px;}
 
@@ -2605,7 +2671,8 @@ div#shopify-product-reviews .spr-review-reply {background:#d3d5d8; margin-bottom
 
 
 @media only screen and (max-width:767px) {
-  #product-tabs-plugin > div > .fd-product-tabs {display:none;}
+  #old-fd-product-tabs > .fd-product-tabs,
+  #copycat-tabs > .fd-product-tabs {display:none;}
   .template-product .fd-product-tab-content > ul.fd-product-tabs {display:block;}
 }
 

@@ -1,73 +1,51 @@
 {% assign tabs = product.metafields.ptabs %}
-{{ tabs['tabs'] }}
+<div id="old-fd-product-tabs">
+  {{ tabs['tabs'] }}
+</div>
 
-<style>
-ul.fd-product-tabs {
-  border-bottom: 1px solid #DDDDDD;
-  display: block;
-  margin: 0 0 20px;
-  padding: 0;
-}
-ul.fd-product-tabs li {
-  display: block;
-  float: left;
-  height: 30px;
-  margin-bottom: 0;
-  padding: 0;
-  width: auto;
-}
-ul.fd-product-tabs li a {
-  -moz-border-bottom-colors: none;
-  -moz-border-image: none;
-  -moz-border-left-colors: none;
-  -moz-border-right-colors: none;
-  -moz-border-top-colors: none;
-  background: none repeat scroll 0 0 #F5F5F5;
-  border-color: #DDDDDD !important;
-  border-style: solid;
-  border-width: 1px 1px 0 1px;
-  display: block;
-  font-size: 13px;
-  height: 29px;
-  line-height: 30px;
-  margin: 0;
-  padding: 0 20px;
-  text-decoration: none;
-  width: auto;
-  color: #303030;
-  border-bottom:none !important;
-}
-ul.fd-product-tabs li a.fd-product-tab-active {
-  background: none repeat scroll 0 0 #FFFFFF;
-  border-left-width: 1px;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
-  color: #111111;
-  height: 30px;
-  margin: 0 0 0 -1px;
-  padding-top: 4px;
-  position: relative;
-  top: -4px;
-}
-ul.fd-product-tabs li:first-child a.fd-product-tab-active {
-  margin-left: 0;
-}
-ul.fd-product-tabs li:first-child a {
-  border-top-left-radius: 2px;
-  border-width: 1px 1px 0;
-}
-ul.fd-product-tabs li:last-child a {
-  border-top-right-radius: 2px;
-}
-ul.fd-product-tabs:before, ul.fd-product-tabs:after {
-  content: " ";
-  display: block;
-  height: 0;
-  overflow: hidden;
-  visibility: hidden;
-  width: 0;
-}
-ul.fd-product-tabs:after {
-  clear: both;
-}
-</style>
+<!-- MY Product tabs -->
+{% if product.metafields.copycat.the_what || product.metafields.copycat.the_why || product.metafields.copycat.the_how || product.metafields.copycat.the_details %}
+  <div id="copycat-tabs" style="display: none;">
+    <!-- MY Tab navigation -->
+    <ul class="fd-product-tabs">
+      {% if product.metafields.copycat.the_what %}
+        <li><a href="#copycattab-the-what">The What</a></li>
+      {% endif %}
+      {% if product.metafields.copycat.the_why %}
+        <li><a href="#copycattab-the-why">The Why</a></li>
+      {% endif %}
+      {% if product.metafields.copycat.the_how %}
+        <li><a href="#copycattab-the-how">The How</a></li>
+      {% endif %}
+      {% if product.metafields.copycat.the_details %}
+        <li><a href="#copycattab-the-details">The Details</a></li>
+      {% endif %}
+    </ul>
+
+    <!-- MY Tab panes -->
+    <div class="fd-product-tab-content">
+      {% if product.metafields.copycat.the_what %}
+        <div class="fd-product-tab-pane" id="copycattab-the-what">
+          {{ product.metafields.copycat.the_what }}
+        </div>
+      {% endif %}
+      {% if product.metafields.copycat.the_why %}
+        <div class="fd-product-tab-pane" id="copycattab-the-why">
+          {{ product.metafields.copycat.the_why }}
+        </div>
+      {% endif %}
+      {% if product.metafields.copycat.the_how %}
+        <div class="fd-product-tab-pane" id="copycattab-the-how">
+          {{ product.metafields.copycat.the_how }}
+        </div>
+      {% endif %}
+      {% if product.metafields.copycat.the_details %}
+        <div class="fd-product-tab-pane" id="copycattab-the-details">
+          {{ product.metafields.copycat.the_details }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% else %}
+<!-- None of MY Product Tabs Showing -->
+{% endif %}
