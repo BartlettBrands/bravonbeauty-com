@@ -1066,43 +1066,42 @@
       });
       productModal();
 
-      // FD TABS ON PRODUCT PAGES
-      // COPY CAT TABS ON PRODUCT PAGES REPLACES FD TABS EVENTUALLY
+      // TABS ON PRODUCT PAGES USING COPY CAT INFO
       // manipulate structure depending on browser size
-      var fdTabs = $("#old-fd-product-tabs > .fd-product-tabs"),
-        fdMainTabs = $("#old-fd-product-tabs > .fd-product-tabs > li"),
-        fdMobileTabs = $("#old-fd-product-tabs > .fd-product-tab-content > .fd-product-tabs > li"),
-        fdPane = $("#old-fd-product-tabs > .fd-product-tab-content > div"),
-        tabCount = fdMainTabs.length;
-      var copyCatTabs = $("#copycat-tabs > .fd-product-tabs--copycat"),
+      // var fdTabs = $("#old-fd-product-tabs > .fd-product-tabs"),
+      //   fdMainTabs = $("#old-fd-product-tabs > .fd-product-tabs > li"),
+      //   fdMobileTabs = $("#old-fd-product-tabs > .fd-product-tab-content > .fd-product-tabs > li"),
+      //   fdPane = $("#old-fd-product-tabs > .fd-product-tab-content > div"),
+      //   tabCount = fdMainTabs.length;
+      var copyCatTabs = $("#copycat-tabs > .fd-product-tabs"),
         ccMainTabs = $("#copycat-tabs > .fd-product-tabs > li"),
         ccMobileTabs = $("#copycat-tabs > .fd-product-tab-content > .fd-product-tabs > li"),
         ccPane = $("#copycat-tabs > .fd-product-tab-content > div"),
-        ccTabCount = fdMainTabs.length;
+        ccTabCount = ccMainTabs.length;
 
       // first, copy and paste tab list above every pane.
       // css hides the appropriate ones
-      $("#old-fd-product-tabs > .fd-product-tabs").clone().insertBefore(fdPane);
+      // $("#old-fd-product-tabs > .fd-product-tabs").clone().insertBefore(fdPane);
       $("#copycat-tabs > .fd-product-tabs").clone().insertBefore(ccPane);
 
       // set width for main tabs
-      fdMainTabs.css("width", 100/tabCount + "%");
+      // fdMainTabs.css("width", 100/tabCount + "%");
       ccMainTabs.css("width", 100/ccTabCount + "%");
 
       // function to run on screen resize
-      manipulateFdTabs = function() {
+      manipulateCopyCatTabs = function() {
         getClientWidth();
 
         if (clientWidth < mq_small) {
           // at small size, always show mobile tabs
           // ad a "#" before ids in order to stop other JS from targeting elements
-          fdPane.css("display", "block").attr("data-mobile", "true").each(function() {
-            var paneId = $(this).attr("id");
-            var getIdHash = paneId.substr(0,1);
-            if (getIdHash != "#") {
-              $(this).attr("id", "#" + paneId);
-            }
-          });
+          // fdPane.css("display", "block").attr("data-mobile", "true").each(function() {
+          //   var paneId = $(this).attr("id");
+          //   var getIdHash = paneId.substr(0,1);
+          //   if (getIdHash != "#") {
+          //     $(this).attr("id", "#" + paneId);
+          //   }
+          // });
           ccPane.css("display", "block").attr("data-mobile", "true").each(function() {
             var paneId = $(this).attr("id");
             var getIdHash = paneId.substr(0,1);
@@ -1114,25 +1113,24 @@
           // at non-small sizes, remove hash from id
           // then check if data-mobile was true. if so, set css to display:none
           // THEN activate the normal behavior by clicking on the first tab
-          fdPane.each(function() {
-            var paneId = $(this).attr("id");
-            var getIdHash = paneId.substr(0,1);
-            if (getIdHash === "#") {
-              var subOutput = paneId.substring(1, paneId.length);
-              console.log(subOutput);
-              $(this).attr("id", subOutput);
-            }
-            if ($(this).attr('data-mobile') == 'true') {
-              $(this).css("display", "none").attr("data-mobile", "false");
-              $("#old-fd-product-tabs > .fd-product-tabs > li:first-of-type a").click();
-            }
-          });
+          // fdPane.each(function() {
+          //   var paneId = $(this).attr("id");
+          //   var getIdHash = paneId.substr(0,1);
+          //   if (getIdHash === "#") {
+          //     var subOutput = paneId.substring(1, paneId.length);
+          //     console.log(subOutput);
+          //     $(this).attr("id", subOutput);
+          //   }
+          //   if ($(this).attr('data-mobile') == 'true') {
+          //     $(this).css("display", "none").attr("data-mobile", "false");
+          //     $("#old-fd-product-tabs > .fd-product-tabs > li:first-of-type a").click();
+          //   }
+          // });
           ccPane.each(function() {
             var paneId = $(this).attr("id");
             var getIdHash = paneId.substr(0,1);
             if (getIdHash === "#") {
               var subOutput = paneId.substring(1, paneId.length);
-              console.log(subOutput);
               $(this).attr("id", subOutput);
             }
             if ($(this).attr('data-mobile') == 'true') {
@@ -1142,9 +1140,9 @@
           });
         };
       };
-      manipulateFdTabs();
+      manipulateCopyCatTabs();
       $(window).resize(function() {
-        manipulateFdTabs();
+        manipulateCopyCatTabs();
       });
 
     }

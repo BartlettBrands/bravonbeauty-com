@@ -1,11 +1,6 @@
-{% assign tabs = product.metafields.ptabs %}
-<div id="old-fd-product-tabs">
-  {{ tabs['tabs'] }}
-</div>
-
 <!-- MY Product tabs -->
 {% if product.metafields.copycat.the_what || product.metafields.copycat.the_why || product.metafields.copycat.the_how || product.metafields.copycat.the_details %}
-  <div id="copycat-tabs" style="display: none;">
+  <div id="copycat-tabs">
     <!-- MY Tab navigation -->
     <ul class="fd-product-tabs">
       {% if product.metafields.copycat.the_what %}
