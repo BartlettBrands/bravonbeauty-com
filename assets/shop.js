@@ -18,7 +18,7 @@
     };
     getClientWidth = function() {
       clientWidth = Math.max(document.documentElement["clientWidth"], document.body["scrollWidth"], document.documentElement["scrollWidth"], document.body["offsetWidth"], document.documentElement["offsetWidth"]);
-      console.log(clientWidth);
+      // console.log(clientWidth);
     };
     stickyFooter = function() {
       var total_content_height;
@@ -1066,57 +1066,87 @@
       });
       productModal();
 
-      // TABS ON PRODUCT PAGES USING COPY CAT INFO
-      // manipulate structure depending on browser size
-      var copyCatTabs = $("#copycat-tabs > .fd-product-tabs"),
-        ccMainTabs = $("#copycat-tabs > .fd-product-tabs > li"),
-        ccMobileTabs = $("#copycat-tabs > .fd-product-tab-content > .fd-product-tabs > li"),
-        ccPane = $("#copycat-tabs > .fd-product-tab-content > div"),
-        ccTabCount = ccMainTabs.length;
 
-      // first, copy and paste tab list above every pane.
-      // css hides the appropriate ones
-      $("#copycat-tabs > .fd-product-tabs").clone().insertBefore(ccPane);
 
-      // set width for main tabs
-      ccMainTabs.css("width", 100/ccTabCount + "%");
+        // TABS ON PRODUCT PAGES USING COPY CAT INFO
+        // manipulate structure depending on browser size
+        var copyCatTabs = $('#copycat-tabs > .fd-product-tabs'),
+            ccMainTabs = $('#copycat-tabs > .fd-product-tabs > li'),
+            ccMainTabsLink = $('#copycat-tabs > .fd-product-tabs > li > a'),
+            ccMobileTabs = $('#copycat-tabs > .fd-product-tab-content > .fd-product-tabs > li'),
+            ccContent = $('#copycat-tabs > .fd-product-tab-content'),
+            ccPane = $('#copycat-tabs > .fd-product-tab-content > div'),
+            ccTabCount = ccMainTabs.length;
 
-      // function to run on screen resize
-      manipulateCopyCatTabs = function() {
-        getClientWidth();
+        // first, copy and paste tab list above every pane.
+        // css hides the appropriate ones
+        $('#copycat-tabs > .fd-product-tabs').clone().insertBefore(ccPane);
 
-        if (clientWidth < mq_small) {
-          // at small size, always show mobile tabs
-          // ad a "#" before ids in order to stop other JS from targeting elements
-          ccPane.css("display", "block").attr("data-mobile", "true").each(function() {
-            var paneId = $(this).attr("id");
-            var getIdHash = paneId.substr(0,1);
-            if (getIdHash != "#") {
-              $(this).attr("id", "#" + paneId);
+        // set width for main tabs
+        ccMainTabs.css('width', 100/ccTabCount + '%');
+
+        $(ccMainTabsLink).click(function() {
+            event.preventDefault();
+            var href = $(this).attr('href'),
+                target = href.substr(1, href.length);
+            ccMainTabsLink.removeClass('fd-product-tab-active');
+            $(this).addClass('fd-product-tab-active');
+            ccPane.css('display', 'none');
+            $('#copycat-tabs > .fd-product-tab-content > div[id="' + target + '"]').css('display', 'block');
+        });
+
+        // function to run on screen resize
+        manipulateCopyCatTabs = function() {
+            getClientWidth();
+
+            if (clientWidth < mq_small) {
+                // at small size, always show mobile tabs
+                // ad a '#' before ids in order to stop other JS from targeting elements
+                ccMainTabs.each(function() {
+                    $(this).children().removeClass('.fd-product-tab-active');
+                });
+                ccPane.css('display', 'block').attr('data-mobile', 'true').each(function() {
+                    var paneId = $(this).attr('id'),
+                        getIdHash = paneId.substr(0,1);
+                    if (getIdHash !== '#') {
+                        $(this).attr('id', '#' + paneId);
+                    }
+                });
             }
-          });
-        } else {
-          // at non-small sizes, remove hash from id
-          // then check if data-mobile was true. if so, set css to display:none
-          // THEN activate the normal behavior by clicking on the first tab
-          ccPane.each(function() {
-            var paneId = $(this).attr("id");
-            var getIdHash = paneId.substr(0,1);
-            if (getIdHash === "#") {
-              var subOutput = paneId.substring(1, paneId.length);
-              $(this).attr("id", subOutput);
+            else {
+                // at non-small sizes, remove hash from id
+                // then check if data-mobile was true. if so, set css to display:none
+                // THEN activate the normal behavior by clicking on the first tab
+                var activePane = '';
+                ccMainTabs.each(function() {
+                    var tabLink = $(this).children(),
+                        linkHref = tabLink.attr('href');
+                    if (tabLink.hasClass('fd-product-tab-active')) {
+                        activePane = linkHref.substr(1, linkHref.length);
+                    }
+                });
+                ccPane.css('display', 'none').each(function() {
+                    var paneId = $(this).attr('id'),
+                        getIdHash = paneId.substr(0,1);
+                    if (getIdHash === '#') {
+                        paneId = paneId.substr(1, paneId.length);
+                        $(this).attr('id', paneId);
+                    }
+                    if (activePane === paneId) {
+                        $(this).css('display', 'block');
+                    }
+                });
+                if (activePane === '') {
+                    $('#copycat-tabs > .fd-product-tabs > li:first-of-type > a').addClass('fd-product-tab-active');
+                    $('#copycat-tabs > .fd-product-tab-content > div:first-of-type').css('display', 'block');
+                }
             }
-            if ($(this).attr('data-mobile') == 'true') {
-              $(this).css("display", "none").attr("data-mobile", "false");
-              $("#copycat-tabs > .fd-product-tabs > li:first-of-type a").click();
-            }
-          });
         };
-      };
-      manipulateCopyCatTabs();
-      $(window).resize(function() {
         manipulateCopyCatTabs();
-      });
+        $(window).resize(function() {
+            manipulateCopyCatTabs();
+        });
+
 
     }
     if (PAGE.hasClass('template-article')) {
