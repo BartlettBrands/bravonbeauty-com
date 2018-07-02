@@ -507,9 +507,9 @@ main {
 }
 
 #gift-card-holder .corner.top-left {
-  background:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/corner-top-left.gift-card.png?11655870428368540267) 0 0 no-repeat;
+  background:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/corner-top-left.gift-card.png?18097410138597393267) 0 0 no-repeat;
   @include supported(svg) {
-    background:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/corner-top-left.gift-card.svg?11655870428368540267) 0 0 no-repeat;
+    background:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/corner-top-left.gift-card.svg?18097410138597393267) 0 0 no-repeat;
   }
   top:-1px;
   left:-1px;
@@ -517,7 +517,7 @@ main {
 
 #gift-card-holder .corner.top-right {
   @include unsupported(borderradius) {
-    background:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/corner-top-right.gift-card.png?11655870428368540267) 0 0 no-repeat;
+    background:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/corner-top-right.gift-card.png?18097410138597393267) 0 0 no-repeat;
     top:0px;
     right:0px;
     width:7px;
@@ -527,7 +527,7 @@ main {
 
 #gift-card-holder .corner.bottom-left {
   @include unsupported(borderradius) {
-    background:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/corner-bottom-left.gift-card.png?11655870428368540267) 0 0 no-repeat;
+    background:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/corner-bottom-left.gift-card.png?18097410138597393267) 0 0 no-repeat;
     bottom:0px;
     left:0px;
     width:7px;
@@ -536,9 +536,9 @@ main {
 }
 
 #gift-card-holder .corner.bottom-right {
-  background:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/corner-bottom-right.gift-card.png?11655870428368540267) 0 0 no-repeat;
+  background:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/corner-bottom-right.gift-card.png?18097410138597393267) 0 0 no-repeat;
   @include supported(svg) {
-    background:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/corner-bottom-right.gift-card.svg?11655870428368540267) 0 0 no-repeat;
+    background:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/corner-bottom-right.gift-card.svg?18097410138597393267) 0 0 no-repeat;
   }
   bottom:-1px;
   right:-1px;
@@ -734,14 +734,14 @@ main {
 .ico-16.print {
   background-image:url('icon-print.gift-card.png');
   @include supported(svg) {
-    background-image:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/icon-print.gift-card.svg?11655870428368540267);
+    background-image:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/icon-print.gift-card.svg?18097410138597393267);
   }
 }
 
 .ico-16.email {
   background-image:url('icon-email.gift-card.png');
   @include supported(svg) {
-    background-image:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/icon-email.gift-card.svg?11655870428368540267);
+    background-image:url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/icon-email.gift-card.svg?18097410138597393267);
   }
 }
 

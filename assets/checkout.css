@@ -1,4 +1,24 @@
-@import url("//fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:400,700");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  @import url("//fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:400,700");
 
 
 
@@ -33,7 +53,7 @@ input[type="button"]:hover, input[type="submit"]:hover { background: #777777; }
 #container.slim #header { background: none; }
 
 #header { width: 100%; background: none; padding: 0 5px; }
-#header #logo { display: block; margin: 0 auto; background: url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/logo_medium.png?11655870428368540267) 50% 50% no-repeat; height: 240px; width: 240px; /* */ }
+#header #logo { display: block; margin: 0 auto; background: url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/logo_medium.png?18097410138597393267) 50% 50% no-repeat; height: 240px; width: 240px; /* */ }
 #header #tagline { /*  */ display: none; /* */ }
 #header #tagline .title { font-family:  "Montserrat" ; font-size: 28px; margin: 0; text-align: center; display: block; color:  #f7f7f7  ; padding: 50px 0; }
 #header #tagline .title a { color:  #f7f7f7  ; display: inline-block; bottom: 5px; left: 0; }
