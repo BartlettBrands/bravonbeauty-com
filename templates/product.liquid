@@ -32,6 +32,9 @@
   <div class="positions active hide-for-js">
     <div data-position="title-vendor">
       <h1 class="page-title" itemprop="name">{{ product.title }}</h1>
+      <a class="page-title-product-reviews" href="#shopify-product-reviews">
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+      </a>
       {% if settings.product-brand-show %}
         {% assign product_vendor_handle = product.vendor | handle %}
         {% if collections[product_vendor_handle].handle == product_vendor_handle %}
@@ -182,7 +185,7 @@
   <div class="columns">
     <meta itemprop="url" content="{{ shop.url }}{{ product.url }}" />
     <meta itemprop="image" content="{{ product.featured_image.src | product_img_url: 'grande' }}" />
-    <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+    <div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div>
   </div>
 </div>
 
