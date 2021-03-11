@@ -1801,11 +1801,11 @@ a:hover {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 @font-face {
     font-family: 'blockshop-icons';
-    src: url('//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/blockshop-icons.eot?18097410138597393267');
-    src: url('//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/blockshop-icons.eot?18097410138597393267?#iefix') format("embedded-opentype"),
-        url('//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/blockshop-icons.woff?18097410138597393267') format("woff"),
-        url('//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/blockshop-icons.ttf?18097410138597393267') format("truetype"),
-        url('//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/blockshop-icons.svg?18097410138597393267') format("svg");
+    src: url('//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/blockshop-icons.eot?v=2224734437321968890');
+    src: url('//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/blockshop-icons.eot?v=2224734437321968890?#iefix') format("embedded-opentype"),
+        url('//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/blockshop-icons.woff?v=4818598373008567540') format("woff"),
+        url('//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/blockshop-icons.ttf?v=8697265089927132797') format("truetype"),
+        url('//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/blockshop-icons.svg?v=3454321256392310929') format("svg");
     font-weight: normal;
     font-style: normal;
 }
@@ -2529,7 +2529,7 @@ you can use the generic selector below, but it's slower:
 
 /* mouse grab icon */
 .grabbing {
-    cursor: url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/grabbing.png?18097410138597393267) 8 8, move;
+    cursor: url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/grabbing.png?v=16299554155157915417) 8 8, move;
 }
 
 
@@ -2879,7 +2879,7 @@ you can use the generic selector below, but it's slower:
 /* preloading images */
 .owl-item.loading {
     min-height: 150px;
-    background: url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/AjaxLoader.gif?18097410138597393267) no-repeat center center;
+    background: url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/AjaxLoader.gif?v=6643103100573399637) no-repeat center center;
 }
 
 
@@ -3857,7 +3857,7 @@ form.custom .custom.dropdown ul li.disabled {
     text-decoration: line-through;
 }
 select {
-    background: #ffffff url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/icon__arrowselect.png?18097410138597393267) no-repeat;
+    background: #ffffff url(//cdn.shopify.com/s/files/1/0727/6827/t/6/assets/icon__arrowselect.png?v=14947499257978972930) no-repeat;
     background-position: right;
     border: 1px solid;
     color: #444444;
